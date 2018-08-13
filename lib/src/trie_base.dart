@@ -6,7 +6,8 @@ class Trie {
   List<String> _words;
 
   bool get isCaseSensitive => _isCaseSensitive;
-  set isCaseSensitive(bool caseSensitivity) => _isCaseSensitive = caseSensitivity;
+  set isCaseSensitive(bool caseSensitivity) =>
+      _isCaseSensitive = caseSensitivity;
 
   Trie() {
     _head = new _TrieNode(null);
@@ -34,7 +35,9 @@ class Trie {
     }
     for (_TrieNode child in node.children) {
       if ((child.char == word.substring(0, 1)) ||
-          (!_isCaseSensitive && child.char.substring(0, child.char.length).toLowerCase() == word.substring(0, 1).toLowerCase())) {
+          (!_isCaseSensitive &&
+              child.char.substring(0, child.char.length).toLowerCase() ==
+                  word.substring(0, 1).toLowerCase())) {
         _addWordNode(word.substring(1), child);
         return;
       }
@@ -43,7 +46,8 @@ class Trie {
     node._addWord(word);
   }
 
-  List<String> _collect(StringBuffer prefix, _TrieNode node, List<String> words) {
+  List<String> _collect(
+      StringBuffer prefix, _TrieNode node, List<String> words) {
     if (node != _head) {
       prefix.write(node.char);
     }
@@ -64,24 +68,28 @@ class Trie {
     return _getAllWordsWithPrefixHelper(prefix, _head, fullPrefix);
   }
 
-  List<String> _getAllWordsWithPrefixHelper(String prefix, _TrieNode node, StringBuffer fullPrefix) {
+  List<String> _getAllWordsWithPrefixHelper(
+      String prefix, _TrieNode node, StringBuffer fullPrefix) {
     if (prefix.length == 0) {
       String pre = fullPrefix.toString();
       return _collect(
           new StringBuffer(pre.substring(0, max(pre.length - 1, 0))), node, []);
     }
 
-    for(_TrieNode child in node.children) {
-      if ((child.char == prefix.substring(0, 1)) || (!_isCaseSensitive && child.char.substring(0, child.char.length).toLowerCase() == prefix.substring(0, 1).toLowerCase())) {
+    for (_TrieNode child in node.children) {
+      if ((child.char == prefix.substring(0, 1)) ||
+          (!_isCaseSensitive &&
+              child.char.substring(0, child.char.length).toLowerCase() ==
+                  prefix.substring(0, 1).toLowerCase())) {
         fullPrefix.write(child.char);
-        return _getAllWordsWithPrefixHelper(prefix.substring(1), child, fullPrefix);
+        return _getAllWordsWithPrefixHelper(
+            prefix.substring(1), child, fullPrefix);
       }
     }
 
     return [];
   }
 }
-
 
 class _TrieNode {
   String _char;

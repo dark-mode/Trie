@@ -1,6 +1,6 @@
 # Trie
 
-A library for Dart developers. Made by Christopher Gong and Ankush Vangari.
+A comprehensive Trie implementation in Dart, for Dart developers. Optimized for autocomplete. Made by Christopher Gong and Ankush Vangari.
 
 Created from templates made available by Stagehand under a BSD-style
 [license](https://github.com/dart-lang/stagehand/blob/master/LICENSE).
