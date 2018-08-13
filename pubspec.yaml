@@ -1,8 +1,8 @@
-name: trie
-description: A starting point for Dart libraries or applications.
-# version: 1.0.0
-# homepage: https://www.example.com
-# author: chris <email@example.com>
+name: Trie
+description: A comprehensive Trie implementation in Dart, optimized for autocomplete.
+ version: 1.0.0
+ homepage: https://github.com/dark-mode/Trie
+ authors:  Christopher Gong and Ankush Vangari <dragonatekush@gmail.com>, <christophergong@berkeley.edu>, <ankush@vangari.com>
 
 environment:
   sdk: '>=2.0.0-dev.55.0 <2.0.0'
