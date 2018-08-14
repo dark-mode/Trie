@@ -5,8 +5,8 @@ A comprehensive Trie implementation in Dart, for Dart developers. Optimized for 
 Created from templates made available by Stagehand under a BSD-style
 [license](https://github.com/dart-lang/stagehand/blob/master/LICENSE).
 
-Full API docs attached 
-[here](https://pub.dartlang.org/documentation/trie/latest/trie/Trie-class.html)
+Full API docs are linked 
+[here](https://pub.dartlang.org/documentation/trie/latest/trie/Trie-class.html).
 
 ## Usage
 
