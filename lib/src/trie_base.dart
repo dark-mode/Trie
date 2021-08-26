@@ -3,41 +3,38 @@ import 'dart:math';
 class Trie {
   _TrieNode _head;
   bool _isCaseSensitive = false;
-  List<String> _words;
 
   bool get isCaseSensitive => _isCaseSensitive;
+
   set isCaseSensitive(bool caseSensitivity) =>
       _isCaseSensitive = caseSensitivity;
 
-  Trie() {
-    _head = new _TrieNode(null);
+  Trie() : _head = new _TrieNode(null);
+
+  Trie.list(List<String> words) : _head = new _TrieNode(null) {
+    words.forEach(addWord);
   }
 
-  addWord(String word) {
+  void addWord(String word) {
     _addWordNode(word, _head);
-  }
-
-  Trie.list(this._words) {
-    _head = new _TrieNode(null);
-    for (String word in _words) {
-      addWord(word);
-    }
   }
 
   List<String> getAllWords() {
     return getAllWordsWithPrefix('');
   }
 
-  _addWordNode(String word, _TrieNode node) {
+  void _addWordNode(String? word, _TrieNode node) {
     if (word == null || word.length == 0) {
       node.endOfWord = true;
       return;
     }
     for (_TrieNode child in node.children) {
-      if ((child.char == word.substring(0, 1)) ||
-          (!_isCaseSensitive &&
-              child.char.substring(0, child.char.length).toLowerCase() ==
-                  word.substring(0, 1).toLowerCase())) {
+      final childChar = child.char;
+      if (childChar != null &&
+          ((childChar == word.substring(0, 1)) ||
+              (!_isCaseSensitive &&
+                  childChar.substring(0, childChar.length).toLowerCase() ==
+                      word.substring(0, 1).toLowerCase()))) {
         _addWordNode(word.substring(1), child);
         return;
       }
@@ -77,10 +74,12 @@ class Trie {
     }
 
     for (_TrieNode child in node.children) {
-      if ((child.char == prefix.substring(0, 1)) ||
-          (!_isCaseSensitive &&
-              child.char.substring(0, child.char.length).toLowerCase() ==
-                  prefix.substring(0, 1).toLowerCase())) {
+      final childChar = child.char;
+      if (childChar != null &&
+          ((childChar == prefix.substring(0, 1)) ||
+              (!_isCaseSensitive &&
+                  childChar.substring(0, childChar.length).toLowerCase() ==
+                      prefix.substring(0, 1).toLowerCase()))) {
         fullPrefix.write(child.char);
         return _getAllWordsWithPrefixHelper(
             prefix.substring(1), child, fullPrefix);
@@ -92,20 +91,25 @@ class Trie {
 }
 
 class _TrieNode {
-  String _char;
+  String? _char;
   List<_TrieNode> _children;
   bool _endOfWord = false;
 
-  _TrieNode(String _char) {
-    this._char = _char;
-    this._children = [];
-  }
+  _TrieNode(String? char)
+      : _char = char,
+        _children = [];
+
+  bool get endOfWord => _endOfWord;
+
+  String? get char => _char;
+
+  List<_TrieNode> get children => _children;
 
   set endOfWord(bool end) {
     _endOfWord = end;
   }
 
-  _addWord(String word) {
+  void _addWord(String word) {
     _TrieNode curr = this;
     for (int i = 0; i < word.length; i++) {
       _TrieNode child = new _TrieNode(word.substring(i, i + 1));
@@ -114,8 +118,4 @@ class _TrieNode {
     }
     curr._endOfWord = true;
   }
-
-  bool get endOfWord => _endOfWord;
-  String get char => _char;
-  List<_TrieNode> get children => _children;
 }
